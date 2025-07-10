@@ -1,8 +1,9 @@
 package ru.mephi.monitoringapp.config
 
-import io.swagger.v3.oas.models.OpenAPI
+import org.springdoc.webmvc.ui.SwaggerWelcomeCommon
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+
 
 /*
 @Configuration
@@ -18,5 +19,15 @@ class OpenApiConfig {
         .addSecurityItem(
             SecurityRequirement().addList("bearerAuth")
         )
+}
+*/
+
+/*
+@Configuration
+class SwaggerConfig {
+    @Bean
+    fun swaggerWelcomeCommon(): SwaggerWelcomeCommon {
+        return
+    }
 }
 */

@@ -4,7 +4,7 @@ spring:
   main:
     banner-mode: off
   datasource:
-    url: jdbc:postgresql://postgres-db:5432/postgres_database
+    url: jdbc:postgresql://localhost:5432/postgres_database
     username: username
     password: password
     driver-class-name: org.postgresql.Driver
@@ -46,6 +46,3 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
 
-springdoc:
-  show-actuator: true
-  use-management-port: true
