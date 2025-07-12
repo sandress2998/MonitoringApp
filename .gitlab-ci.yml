@@ -20,12 +20,12 @@ docs-publish:
     GITHUB_REPO: "sandress2998/MonitoringApp"     # Например, "myorg/monitoring-app"
     GITHUB_PAGES_BRANCH: "gh-pages"            # Ветка для GitHub Pages
   script:
-   - curl -o docs.html "http://host.docker.internal:8080/swagger-ui/index.html"
-   - git clone --branch gh-pages "https://${GITHUB_TOKEN}@github.com/sandress2998/MonitoringApp.git"
-   - cd MonitoringApp
-   - cp ../docs.html ./
-   - git config user.name "CI Bot" && git config user.email "ci@example.com"
-   - git add docs.html && git commit -m "Update $(date +%Y-%m-%d)"
-   - git push "https://${GITHUB_TOKEN}@github.com/sandress2998/MonitoringApp.git" gh-pages
+    - curl -o docs.html "http://host.docker.internal:8080/swagger-ui/index.html"
+    - git clone --branch gh-pages "https://${GITHUB_TOKEN}@github.com/sandress2998/MonitoringApp.git"
+    - cd MonitoringApp
+    - cp ../docs.html ./
+    - git config user.name "CI Bot" && git config user.email "ci@example.com"
+    - git add docs.html && git commit -m "Update $(date +%Y-%m-%d)"
+    - git push "https://${GITHUB_TOKEN}@github.com/sandress2998/MonitoringApp.git" gh-pages
   rules:
     - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"
