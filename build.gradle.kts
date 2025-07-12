@@ -56,5 +56,5 @@ tasks.withType<Test> {
 }
 
 openApi {
-    apiDocsUrl.set("http://172.17.0.1:8080/v3/api-docs")
+    apiDocsUrl.set("http://host.docker.internal:8080/v3/api-docs")
 }
