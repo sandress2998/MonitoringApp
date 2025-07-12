@@ -24,7 +24,7 @@ swagger-generate:
 
 docs-publish:
   stage: docs-publish
-  image: alpine:latest  # Легковесный образ
+  image: gradle:8.6-jdk17  
   variables:
     OPENAPI_SOURCE: "./build/tmp/openapi.json"  # Исходный файл
     DOCS_DIR: "./docs"                         # Папка для HTML
