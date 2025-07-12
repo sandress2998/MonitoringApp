@@ -16,7 +16,7 @@ swagger-generate:
   image: gradle:8.6-jdk17
   artifacts:
     paths:
-      - ./build/tmp/openapi.json
+      - ./build/openapi.json
   before_script:
     - chmod +x gradlew
   script:
@@ -34,50 +34,12 @@ docs-publish:
     - apk add --no-cache git curl  # Устанавливаем инструменты
   script:
     - >
-      mkdir -p ${DOCS_DIR}
-
-      cp ${OPENAPI_SOURCE} ${DOCS_DIR}/openapi.json
-
-      cat > ${DOCS_DIR}/index.html <<EOF
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>API Documentation</title>
-          <link 
-            rel="stylesheet" 
-            href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" 
-          />
-        </head>
-        <body>
-          <div id="swagger-ui"></div>
-          <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
-          <script>
-            SwaggerUIBundle({
-              url: "./openapi.json",  # Путь относительно index.html
-              dom_id: "#swagger-ui",
-              presets: [
-                SwaggerUIBundle.presets.apis,
-                SwaggerUIBundle.SwaggerUIStandalonePreset
-              ],
-              layout: "StandaloneLayout",
-              deepLinking: true
-            })
-          </script>
-        </body>
-      </html>
-      EOF
-
-      git clone --branch=${GITHUB_PAGES_BRANCH} https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git gh-pages-deploy
-
-      cp -r ${DOCS_DIR}/* gh-pages-deploy/
-
-      cd gh-pages-deploy
-      git config user.name "GitLab CI"
-      git config user.email "ci@gitlab.com"
-      git add .
-      git commit -m "Update Swagger Docs $(date +%Y-%m-%d)"
-      git push origin ${GITHUB_PAGES_BRANCH}
+      curl -o docs.html "http://host.docker.internal:8080/swagger-ui/index.html"
+      git clone --branch gh-pages "https://${GITHUB_TOKEN}@github.com/sandress2998/MonitoringApp.git"
+      cd MonitoringApp
+      cp ../docs.html ./
+      git config user.name "CI Bot" && git config user.email "ci@example.com"
+      git add docs.html && git commit -m "Update $(date +%Y-%m-%d)"
+      git push "https://${GITHUB_TOKEN}@github.com/sandress2998/MonitoringApp.git" gh-pages
   rules:
     - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"
