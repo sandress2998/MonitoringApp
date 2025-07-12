@@ -2,6 +2,7 @@ package ru.mephi.monitoringapp.controller
 
 import io.micrometer.core.instrument.Counter
 import io.micrometer.core.instrument.MeterRegistry
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 import ru.mephi.monitoringapp.annotations.TimeHttpRequest
 import ru.mephi.monitoringapp.database.entity.Book
@@ -10,6 +11,7 @@ import ru.mephi.monitoringapp.model.service.BookService
 import java.util.*
 
 @RestController
+@Tag(name = "Book Controller", description = "Book Controller")
 @RequestMapping("/api/books")
 class BookController (
     private val bookService: BookService,

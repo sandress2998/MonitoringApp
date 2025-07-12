@@ -1,13 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Booking Service Api",
-    "description": "API сервиса покупки книг",
-    "contact": {
-      "name": "Shamanova Elizaveta",
-      "email": "sandress2000@mail.ru"
-    },
-    "version": "1.0.0"
+    "title": "OpenAPI definition",
+    "version": "v0"
   },
   "servers": [
     {
@@ -16,19 +11,16 @@
     }
   ],
   "paths": {
-    "/api/v2/books/{bookId}": {
+    "/api/books/{bookId}": {
       "get": {
         "tags": [
-          "BookingController.v2"
+          "book-controller"
         ],
-        "summary": "Получить книгу",
-        "description": "Endpoint позволяет получить книгу по id",
         "operationId": "get",
         "parameters": [
           {
             "name": "bookId",
             "in": "path",
-            "description": "Идентификатор пользователя",
             "required": true,
             "schema": {
               "type": "string",
@@ -47,19 +39,12 @@
               }
             }
           }
-        },
-        "deprecated": true,
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
-          "BookingController.v2"
+          "book-controller"
         ],
-        "summary": "Обновить книгу",
         "operationId": "update",
         "parameters": [
           {
@@ -93,16 +78,11 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "delete": {
         "tags": [
-          "BookingController.v2"
+          "book-controller"
         ],
         "operationId": "delete",
         "parameters": [
@@ -120,191 +100,15 @@
           "200": {
             "description": "OK"
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
-    "/api/v1/books/{bookId}": {
-      "get": {
-        "tags": [
-          "BookingController.v1"
-        ],
-        "operationId": "get_1",
-        "parameters": [
-          {
-            "name": "bookId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/Book"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "BookingController.v1"
-        ],
-        "operationId": "update_1",
-        "parameters": [
-          {
-            "name": "bookId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatedBookRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/Book"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "BookingController.v1"
-        ],
-        "operationId": "delete_1",
-        "parameters": [
-          {
-            "name": "bookId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/api/v2/books": {
-      "get": {
-        "tags": [
-          "BookingController.v2"
-        ],
-        "summary": "Получить все книги",
-        "operationId": "getAll",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Book"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      },
+    "/api/orders": {
       "post": {
         "tags": [
-          "BookingController.v2"
+          "order-controller"
         ],
-        "summary": "Опубликовать книгу",
         "operationId": "create",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Book"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/Book"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/api/v1/orders": {
-      "post": {
-        "tags": [
-          "OrderController.v1"
-        ],
-        "summary": "Создать новый заказ",
-        "operationId": "create_1",
         "requestBody": {
           "content": {
             "application/json": {
@@ -326,20 +130,15 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
-    "/api/v1/books": {
+    "/api/books": {
       "get": {
         "tags": [
-          "BookingController.v1"
+          "book-controller"
         ],
-        "operationId": "getAll_1",
+        "operationId": "getAll",
         "responses": {
           "200": {
             "description": "OK",
@@ -354,18 +153,13 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "post": {
         "tags": [
-          "BookingController.v1"
+          "book-controller"
         ],
-        "operationId": "create_2",
+        "operationId": "create_1",
         "requestBody": {
           "content": {
             "application/json": {
@@ -387,21 +181,15 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     },
-    "/api/v1/orders/{id}": {
+    "/api/orders/{id}": {
       "get": {
         "tags": [
-          "OrderController.v1"
+          "order-controller"
         ],
-        "summary": "Получить информацию о заказе",
-        "operationId": "get_2",
+        "operationId": "get_1",
         "parameters": [
           {
             "name": "id",
@@ -424,18 +212,12 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       },
       "patch": {
         "tags": [
-          "OrderController.v1"
+          "order-controller"
         ],
-        "summary": "Завершить заказ",
         "operationId": "markAsFinish",
         "parameters": [
           {
@@ -464,12 +246,7 @@
           "200": {
             "description": "OK"
           }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
+        }
       }
     }
   },
@@ -477,41 +254,25 @@
     "schemas": {
       "UpdatedBookRequest": {
         "type": "object",
-        "description": "Обновление информации о пользователе",
         "properties": {
           "title": {
-            "type": "string",
-            "description": "Название книги",
-            "example": "Преступление и наказание"
+            "type": "string"
           },
           "author": {
-            "type": "string",
-            "description": "Имя автора",
-            "example": "Федор Михайлович Достоевский"
+            "type": "string"
           },
           "rating": {
             "type": "integer",
-            "format": "int32",
-            "description": "Рейтинг",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5"
-            ],
-            "example": 5,
-            "minimum": 0
+            "format": "int32"
           },
           "category": {
             "type": "string",
             "enum": [
+              "FANTASY",
               "NOVEL",
               "DETECTIVE",
-              "FANTASY",
               "UNKNOWN"
-            ],
-            "example": "NOVEL"
+            ]
           }
         },
         "required": [
@@ -545,13 +306,11 @@
           },
           "id": {
             "type": "string",
-            "format": "uuid",
-            "readOnly": true
+            "format": "uuid"
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time",
-            "readOnly": true
+            "format": "date-time"
           }
         },
         "required": [
@@ -579,13 +338,11 @@
         "properties": {
           "id": {
             "type": "string",
-            "format": "uuid",
-            "readOnly": true
+            "format": "uuid"
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time",
-            "readOnly": true
+            "format": "date-time"
           },
           "book": {
             "$ref": "#/components/schemas/Book"
@@ -603,13 +360,6 @@
           "createdAt",
           "status"
         ]
-      }
-    },
-    "securitySchemes": {
-      "JWT": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
       }
     }
   }
