@@ -20,7 +20,7 @@ docs-publish:
     GITHUB_REPO: "sandress2998/MonitoringApp"     # Например, "myorg/monitoring-app"
     GITHUB_PAGES_BRANCH: "gh-pages"            # Ветка для GitHub Pages
   script:
-    - >
+    ->
       curl -o docs.html "http://host.docker.internal:8080/swagger-ui/index.html"
       git clone --branch gh-pages "https://${GITHUB_TOKEN}@github.com/sandress2998/MonitoringApp.git"
       cd MonitoringApp
