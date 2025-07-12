@@ -21,7 +21,7 @@ swagger-generate:
     - ./gradlew generateOpenApiDocs
 
 docs-publish:
-  stage: deploy
+  stage: docs-publish
   image: alpine:latest  # Легковесный образ
   variables:
     OPENAPI_SOURCE: "./build/tmp/openapi.json"  # Исходный файл
