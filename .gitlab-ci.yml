@@ -17,6 +17,8 @@ swagger-generate:
   artifacts:
     paths:
       - ./build/tmp/openapi.json
+  before_script:
+    - chmod +x gradlew
   script:
     - ./gradlew generateOpenApiDocs
 
