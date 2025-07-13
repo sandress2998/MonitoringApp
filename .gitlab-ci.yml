@@ -19,5 +19,5 @@ test-circle:
     - |
       for item in $ITEMS; do
         echo "Деплоим $item"
-        ./deploy.sh "$item"
+        echo "Деплоим $item - 2" 
       done
