@@ -1,0 +1,1 @@
+API Documentation is available at https://sandress2998.github.io/MonitoringApp/ 
