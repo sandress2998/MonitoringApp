@@ -1,6 +1,5 @@
 stages:
-  - swagger-generate
-  - docs-publish
+  - test-circle
 
 variables:
   GRADLE_OPTS: -Dorg.gradle.daemon=false
@@ -11,25 +10,14 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
 
-docs-publish:
-  stage: docs-publish
+test-circle:
+  stage: test-circle
   image: gradle:8.6-jdk17
   variables:
-    OPENAPI_SOURCE: "docs/openapi.json"
-    DOCS_SOURCE: "docs/docs.html"                         # Папка для HTML
-    GITHUB_REPO: "sandress2998/MonitoringApp.git"     # Например, "myorg/monitoring-app"
-    GITHUB_PAGES_BRANCH: "gh-pages"            # Ветка для GitHub Pages
-  before_script:
-    - chmod +x gradlew
+    ITEMS: "server1 server2 server3"
   script:
-    - ./gradlew generateOpenApiDocs # генерация документации
-    - git clone --branch ${GITHUB_PAGES_BRANCH} "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}" MonitoringApp
-    - cd MonitoringApp
-    - mkdir -p docs
-    - cp ../${DOCS_SOURCE} ./docs/index.html
-    - cp ../${OPENAPI_SOURCE} ./docs/openapi.json
-    - git config user.name "CI Bot" && git config user.email "ci@example.com"
-    - git add ./docs && git commit --allow-empty -m "Update $(date +%Y-%m-%d)"
-    - git push "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}" ${GITHUB_PAGES_BRANCH}
-  rules:
-    - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"
+    - |
+      for item in $ITEMS; do
+        echo "Деплоим $item"
+        ./deploy.sh "$item"
+      done
