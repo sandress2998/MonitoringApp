@@ -11,18 +11,6 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
 
-swagger-generate:
-  stage: swagger-generate
-  image: gradle:8.6-jdk17
-  artifacts:
-    paths:
-      - ./docs/**
-  before_script:
-    - chmod +x gradlew
-  script:
-    - ./gradlew generateOpenApiDocs
-
-
 docs-publish:
   stage: docs-publish
   image: gradle:8.6-jdk17
@@ -31,7 +19,10 @@ docs-publish:
     DOCS_SOURCE: "docs/docs.html"                         # Папка для HTML
     GITHUB_REPO: "sandress2998/MonitoringApp.git"     # Например, "myorg/monitoring-app"
     GITHUB_PAGES_BRANCH: "gh-pages"            # Ветка для GitHub Pages
+  before_script:
+    - chmod +x gradlew
   script:
+    - ./gradlew generateOpenApiDocs # генерация документации
     - git clone --branch ${GITHUB_PAGES_BRANCH} "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}" MonitoringApp
     - cd MonitoringApp
     - mkdir -p docs
