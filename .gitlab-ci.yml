@@ -22,6 +22,8 @@ docs-publish:
     - git clone --branch ${GITHUB_PAGES_BRANCH} "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}" MonitoringApp
     - cd MonitoringApp
     - mkdir -p docs
+    - chmod +x gradlew
+    - ./gradlew generateOpenApiDocs
     - cp ../${DOCS_SOURCE} ./docs/index.html
     - cp ../${OPENAPI_SOURCE} ./docs/openapi.json
     - git config user.name "CI Bot" && git config user.email "ci@example.com"
